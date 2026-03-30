@@ -2,28 +2,27 @@ package Test;
 
 import Models.Member;
 
-import java.io.FileWriter;
-import java.io.IOException;
+
+import java.io.File;
+import java.io.PrintStream;
 import java.util.Scanner;
 
 public class MemberTests {
-    try {
-        FileWriter myWriter = new FileWriter("MemberPrintText.txt");
-        myWriter.write("Files in Java might be tricky, but it is fun enough!");
-        myWriter.close();  // must close manually
-        System.out.println("Successfully wrote to the file.");
-    } catch (IOException e) {
-        System.out.println("An error occurred.");
-        e.printStackTrace();
-    }
-
-
 
     Scanner input = new Scanner(System.in);
 
     Member m1 = new Member();
 
     public void main(String[] args) {
+        PrintStream membersOut = null;
+        try {
+            membersOut = new PrintStream(new File("memberPrintTest.txt"));
+            System.setOut(membersOut);
+        }
+        catch (Exception e) {
+            e.printStackTrace();
+        }
+
         System.out.println("Enter your first name:");
         String name = input.nextLine();
         m1.getFirstName(name);
@@ -35,5 +34,8 @@ public class MemberTests {
         System.out.println("Enter your CNP:");
         name = input.nextLine();
         m1.getCNP(name);
+
+        assert membersOut != null;
+        membersOut.println(m1);
     }
 }

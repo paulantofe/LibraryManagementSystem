@@ -1,0 +1,4 @@
+Enter your first name:
+Enter your last name:
+Enter your CNP:
+Models.Member@1be6f5c3
